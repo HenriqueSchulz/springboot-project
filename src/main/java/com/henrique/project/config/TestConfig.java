@@ -47,18 +47,27 @@ public class TestConfig implements CommandLineRunner{
 		userRepository.saveAll(Arrays.asList(seed1, seed2));
 		orderRepository.saveAll(Arrays.asList(seed3, seed4, seed5));
 		
-		Category seed6 = new Category(null, "Eletronics");
-		Category seed7 = new Category(null, "Furniture");
-		Category seed8 = new Category(null, "Decoration");
+		Category cat1 = new Category(null, "Eletronics");
+		Category cat2 = new Category(null, "Furniture");
+		Category cat3 = new Category(null, "Decoration");
 		
-		Product seed9 = new Product(null, "Lamp", "Good lamp", 90.5, "");
-		Product seed10 = new Product(null, "Pc dell", "Dell notebook 4GB Ram", 799.9, "");
-		Product seed11 = new Product(null, "Paint", "Good decoration for yout room", 20.5, "");
-		Product seed12 = new Product(null, "Bed", "Minimalist bed, black", 200.0, "");
-		Product seed13 = new Product(null, "Samsung S20", "Samsung S series phone", 480.8, "");
+		Product seed6 = new Product(null, "Lamp", "Good lamp", 90.5, "");
+		Product seed7 = new Product(null, "Pc dell", "Dell notebook 4GB Ram", 799.9, "");
+		Product seed8 = new Product(null, "Paint", "Good decoration for yout room", 20.5, "");
+		Product seed9 = new Product(null, "Bed", "Minimalist bed, black", 200.0, "");
+		Product seed10 = new Product(null, "Samsung S20", "Samsung S series phone", 480.8, "");
 		
-		categoryRepository.saveAll(Arrays.asList(seed6, seed7, seed8));
-		productRepository.saveAll(Arrays.asList(seed9, seed10, seed11, seed12, seed13));
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
+		productRepository.saveAll(Arrays.asList(seed6, seed7, seed8, seed9, seed10));
 		
+		seed6.getCategories().add(cat2);
+		seed6.getCategories().add(cat3);
+		seed7.getCategories().add(cat1);
+		seed8.getCategories().add(cat3);
+		seed9.getCategories().add(cat2);
+		seed9.getCategories().add(cat3);
+		seed10.getCategories().add(cat1);
+		
+		productRepository.saveAll(Arrays.asList(seed6, seed7, seed8, seed9, seed10));
 	}
 }
