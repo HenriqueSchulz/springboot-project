@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.henrique.project.entities.Category;
 import com.henrique.project.entities.Order;
+import com.henrique.project.entities.OrderItem;
 import com.henrique.project.entities.Product;
 import com.henrique.project.entities.User;
 import com.henrique.project.entities.enums.OrderStatus;
 import com.henrique.project.repositories.CategoryRepository;
+import com.henrique.project.repositories.OrderItemRepository;
 import com.henrique.project.repositories.OrderRepository;
 import com.henrique.project.repositories.ProductRepository;
 import com.henrique.project.repositories.UserRepository;
@@ -33,6 +35,9 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -69,5 +74,14 @@ public class TestConfig implements CommandLineRunner{
 		seed10.getCategories().add(cat1);
 		
 		productRepository.saveAll(Arrays.asList(seed6, seed7, seed8, seed9, seed10));
+		
+		OrderItem seed11 = new OrderItem(2, seed6.getPrice(), seed3, seed6);
+		OrderItem seed12 = new OrderItem(1, seed8.getPrice(), seed3, seed8);
+		OrderItem seed13 = new OrderItem(1, seed7.getPrice(), seed4, seed7);
+		OrderItem seed14 = new OrderItem(1, seed10.getPrice(), seed4, seed10);
+		OrderItem seed15 = new OrderItem(1, seed9.getPrice(), seed5, seed9);
+		
+		orderItemRepository.saveAll(Arrays.asList(seed11, seed12, seed13, seed14, seed15));
+		
 	}
 }
