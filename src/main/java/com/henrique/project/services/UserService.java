@@ -12,6 +12,8 @@ import com.henrique.project.repositories.UserRepository;
 import com.henrique.project.services.exceptions.DataBaseException;
 import com.henrique.project.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class UserService {
 	
@@ -44,9 +46,14 @@ public class UserService {
 	}
 	
 	public User updateUser(Long id, User user) {
-		User userUpdated = userRepository.getReferenceById(id);
-		updateData(userUpdated, user);
-		return userRepository.save(userUpdated);
+		try {	
+			User userUpdated = userRepository.getReferenceById(id);
+			updateData(userUpdated, user);
+			return userRepository.save(userUpdated);
+		} catch (EntityNotFoundException e) {
+			e.printStackTrace();
+			throw new ResourceNotFoundException(id);
+		}
 	}
 
 	private void updateData(User userUpdated, User user) {
