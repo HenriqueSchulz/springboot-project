@@ -40,6 +40,10 @@ public class OrderItem implements Serializable{
 		return price;
 	}
 	
+	public Double getSubTotal() {
+		return price * quantity;
+	}
+	
 	@JsonIgnore
 	public Order getOrder() {
 		return id.getOrder();
@@ -49,6 +53,7 @@ public class OrderItem implements Serializable{
 		return id.getProduct();
 	}
 	
+	
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
@@ -56,6 +61,7 @@ public class OrderItem implements Serializable{
 	public void setPrice(Double price) {
 		this.price = price;
 	}
+	
 
 	public void setOrder(Order order) {
 		id.setOrder(order);

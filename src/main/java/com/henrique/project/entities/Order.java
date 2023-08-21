@@ -79,6 +79,14 @@ public class Order implements Serializable{
 		return payment;
 	}
 
+	public Double getTotal() {
+		Double total = 0.0;
+		for(OrderItem orderItem: items) {
+			total += orderItem.getSubTotal();
+		}
+		return total;
+	}
+	
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}
@@ -117,5 +125,6 @@ public class Order implements Serializable{
 		Order other = (Order) obj;
 		return Objects.equals(id, other.id);
 	}
+	
 	
 }
